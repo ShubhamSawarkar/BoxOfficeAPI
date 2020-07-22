@@ -16,6 +16,7 @@ import com.restapi.dao.RoleDAO;
 import com.restapi.dao.UserDAO;
 import com.restapi.model.ApiUser;
 
+@Service
 public class UserDetailServiceImpl implements UserDetailsService {
 	
 	@Autowired
@@ -31,9 +32,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		
 		if(user == null)
 		{
+			System.out.println("[DEBUG] : User Not Found!");
 			throw new UsernameNotFoundException("User " + userName + " was not found in the Database!");
 		}
 		
+		System.out.println("[DEBUG] : Found User : " + user);
+			
 		List<String> roleNames = this.roleDao.getRoleNames(user.getUserId());
 		
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();

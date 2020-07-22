@@ -2,8 +2,6 @@ package com.restapi.model;
 
 import java.time.LocalDateTime;
 
-import java.util.Date;
-
 public class Show {
 	private int id;
 	private int screenNo;

@@ -30,7 +30,7 @@ public class RoleDAO extends JdbcDaoSupport{
 	public List<String> getRoleNames(long userId)
 	{
 		String query = "SELECT r." + COLUMN_ROLE_ROLENAME + " FROM " + TABLE_USER_ROLE + " ur, " + TABLE_ROLE + " r WHERE ur." +
-						COLUMN_USER_ROLE_ROLEID + " = u." + COLUMN_ROLE_ID + " AND ur." + COLUMN_USER_ROLE_USERID + " = ?";
+						COLUMN_USER_ROLE_ROLEID + " = r." + COLUMN_ROLE_ID + " AND ur." + COLUMN_USER_ROLE_USERID + " = ?";
 		
 		Object[] params = new Object[] { userId };
 		

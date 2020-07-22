@@ -65,4 +65,25 @@ public class Seat {
 		this.spaceAfter = spaceAfter;
 	}
 	
+	public char getCharRowNo()
+	{
+		return (char) (this.rowNo + 64);
+	}
+	
+	public void setRowNo(String rowNo)
+	{
+		if(rowNo.isBlank())
+		{
+			this.rowNo = 0;
+		}
+		char row = rowNo.charAt(0);
+		if((row >= 'A') && (row <= 'Z'))
+		{
+			this.rowNo = row - 64;
+		}
+		else
+		{
+			this.rowNo = 0;
+		}
+	}
 }

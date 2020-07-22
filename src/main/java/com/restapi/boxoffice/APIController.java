@@ -3,8 +3,6 @@ package com.restapi.boxoffice;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +15,15 @@ import com.restapi.model.*;
 @RestController
 public class APIController {
 	
-	@Autowired
-	private ShowDAO showDao;
 	
-	@Autowired
-	private SeatDAO seatDao;
+	@Autowired private UserDAO userDao;
+	  
+	@Autowired private SeatDAO seatDao;
+	  
+  	@Autowired private ShowDAO showDao;
+  	
+  	@Autowired private MovieDAO movieDao;
+	 
 	
 	@GetMapping("/loginSuccess")
 	@ResponseBody
@@ -90,4 +92,61 @@ public class APIController {
 	{
 		return showDao.addShow(screenNo, date, time, movieId);
 	}
+	
+	@GetMapping("/addMovie")
+	@ResponseBody
+	public boolean addMovie(@RequestParam(name = "title") String title, @RequestParam(name = "runtime") int runtime, @RequestParam(name = "release-date") String releaseDt)
+	{
+		Movie movie = new Movie();
+		
+		movie.setTitle(title);
+		movie.setRunTime(runtime);
+		movie.setReleaseDt(releaseDt);
+		
+		return movieDao.addMovie(movie);
+	}
+	
+	@GetMapping("/getMovies")
+	@ResponseBody
+	public List<Movie> getMovies()
+	{
+		return movieDao.getMovies();
+	}
+	
+	@GetMapping("/addUser")
+	@ResponseBody
+	public boolean addUser(@RequestParam(name = "username") String userName, @RequestParam(name = "password") String password, @RequestParam(name = "admin") boolean isAdmin)
+	{
+		return userDao.addUser(userName, password, isAdmin);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -26,6 +26,11 @@ public class ShowDAO extends JdbcDaoSupport
 		this.setDataSource(dataSource);
 	}
 	
+	public ShowDAO()
+	{
+		
+	}
+	
 	public Show getShowById(int showId)
 	{
 		String query = "SELECT * " + " FROM " + TABLE_SHOWS + " WHERE " + COLUMN_SHOWS_ID + " = ?";
@@ -37,6 +42,8 @@ public class ShowDAO extends JdbcDaoSupport
 		try
 		{
 			Show show = this.getJdbcTemplate().queryForObject(query, params, mapper);
+			
+			//Show show = jdbcTemplate.queryForObject(query,  params, mapper);
 			return show;
 		}catch(EmptyResultDataAccessException e)
 		{

@@ -7,6 +7,7 @@ public class Movie {
 	private int movieID;
 	private String title;
 	private int runTime;
+	private String releaseDate;
 	private LocalDate releaseDt;
 	private LocalDate lastShowDt;
 	public int getMovieID() {
@@ -32,7 +33,8 @@ public class Movie {
 		return releaseDt.getDayOfMonth() + "/" + releaseDt.getMonthValue() + "/" + releaseDt.getYear();
 	}
 	public void setReleaseDt(String releaseDt) {
-		String[] date = releaseDt.split(":", 3);
+		this.releaseDate = releaseDt;
+		String[] date = releaseDt.split("/", 3);
 		this.releaseDt = LocalDate.of(Integer.valueOf(date[2]), Integer.valueOf(date[1]), Integer.valueOf(date[0]));
 	}
 	public String getLastShowDt() {
@@ -41,6 +43,21 @@ public class Movie {
 	public void setLastShowDt(String lastShowDt) {
 		String[] date = lastShowDt.split(":", 3);
 		this.lastShowDt = LocalDate.of(Integer.valueOf(date[2]),Integer.valueOf(date[1]), Integer.valueOf(date[0]));
+	}
+	
+	public LocalDate getLocalReleaseDt()
+	{
+		return this.releaseDt;
+	}
+	
+	public void setReleaseDtStr(String date)
+	{
+		this.releaseDate = date;
+	}
+	
+	public String relaseDtStr()
+	{
+		return this.releaseDate;
 	}
 	
 	

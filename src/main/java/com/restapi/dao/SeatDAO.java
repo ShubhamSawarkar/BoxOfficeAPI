@@ -12,12 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.restapi.model.AdminControl;
 import com.restapi.model.Seat;
 
+import com.restapi.mapper.SeatMapper;
+
 @Repository
 @Transactional
 public class SeatDAO extends JdbcDaoSupport{
 	
 	public static final String TABLE_SEATS = "Seats";
-	public static final String COLUMN_SEATS_SCREENNO = "ScreenNo";
+	public static final String COLUMN_SEATS_SCREENNO = "Screen_No";
 		
 	@Autowired
 	public SeatDAO(DataSource dataSource)
@@ -31,7 +33,11 @@ public class SeatDAO extends JdbcDaoSupport{
 		
 		Object[] params = new Object[] { screenNo };
 		
-		List<Seat> seats = this.getJdbcTemplate().queryForList(query, params, Seat.class);
+		//List<Seat> seats = this.getJdbcTemplate().queryForList(query, params, Seat.class);
+		
+		SeatMapper mapper = new SeatMapper();
+		
+		List<Seat> seats = this.getJdbcTemplate().query(query, params, mapper);
 		
 		if(seats.isEmpty())
 		{
@@ -63,4 +69,5 @@ public class SeatDAO extends JdbcDaoSupport{
 		
 		return AdminControl.changePrice(seat);
 	}
+	
 }

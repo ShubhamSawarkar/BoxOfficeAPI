@@ -41,4 +41,10 @@ public class ApiUser {
 		this.encryptedPasword = encryptedPasword;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return "{User} \n" + " User Name : " + this.userName + "\n User ID : " + this.userId + "\n Encypted Password : " + this.encryptedPasword;
+	}
+	
 }

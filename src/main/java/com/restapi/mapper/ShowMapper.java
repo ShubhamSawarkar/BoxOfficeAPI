@@ -11,9 +11,9 @@ public class ShowMapper implements RowMapper<Show>
 {
 
 	public static final int INDEX_SHOWS_ID = 1;
-	public static final int INDEX_SHOWS_SCREENNO = 2;
-	public static final int INDEX_SHOWS_DATE = 3;
-	public static final int INDEX_SHOWS_TIME = 4;
+	public static final int INDEX_SHOWS_SCREENNO = 4;
+	public static final int INDEX_SHOWS_DATE = 2;
+	public static final int INDEX_SHOWS_TIME = 3;
 	public static final int INDEX_SHOWS_MOVIEID = 5;
 	
 	@Override

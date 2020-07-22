@@ -53,7 +53,7 @@ public class AdminControl {
 	private static final String QUERY_ADDSHOW = "INSERT INTO " + TABLE_SHOWS + "(" + COLUMN_SHOWS_ID + ", " + COLUMN_SHOWS_DATE + ", " + COLUMN_SHOWS_TIME + ", " + COLUMN_SHOWS_SCREENNO + ", " + 
 												COLUMN_SHOWS_MOVIEID + ") VALUES(?, ?, ?, ?, ?)";
 	
-	private static final String QUERY_CHANGE_PRICE = "UPDATE TABLE " + TABLE_SEATS + " SET " + COLUMN_SEATS_PRICE + " = ? WHERE " + COLUMN_SEATS_SCREENNO + " = ? AND " + COLUMN_SEATS_ROWNO + " = ? AND "
+	private static final String QUERY_CHANGE_PRICE = "UPDATE " + TABLE_SEATS + " SET " + COLUMN_SEATS_PRICE + " = ? WHERE " + COLUMN_SEATS_SCREENNO + " = ? AND " + COLUMN_SEATS_ROWNO + " = ? AND "
 												+ COLUMN_SEATS_SEATNO + " = ?";
 	
 	private static final String QUERY_LAST_SCREEN = "SELECT IFNULL(MAX(" + COLUMN_SEATS_SCREENNO + "), 0) FROM "+ TABLE_SEATS;
@@ -393,7 +393,7 @@ public class AdminControl {
 		{
 			open();
 			
-			if((seat.getPrice() <= 0.0) || (seat.getScreenNo() < lastScreenNo()) || (seat.getRowNo() > lastRowOf(seat.getScreenNo())) ||
+			if((seat.getPrice() <= 0.0) || (seat.getScreenNo() > lastScreenNo()) || (seat.getRowNo() > lastRowOf(seat.getScreenNo())) ||
 				(seat.getSeatNo() > lastSeatOf(seat.getScreenNo(), seat.getRowNo())) || (seat.getScreenNo() <= 0) || (seat.getRowNo() <= 0) ||
 				(seat.getSeatNo() <= 0))
 			{
@@ -403,7 +403,7 @@ public class AdminControl {
 			PreparedStatement statement = connection.prepareStatement(QUERY_CHANGE_PRICE);
 			statement.setDouble(1, seat.getPrice());
 			statement.setInt(2, seat.getScreenNo());
-			statement.setInt(3, seat.getRowNo());
+			statement.setString(3, Character.toString(seat.getCharRowNo()));
 			statement.setInt(4, seat.getSeatNo());
 			
 			statement.executeUpdate();
