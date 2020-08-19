@@ -1,0 +1,68 @@
+@charset "ISO-8859-1";
+
+	#showform
+	{
+		width: 100%;
+		margin: auto;
+		background-color: white;
+	}
+	
+	#title
+	{
+		text-align: center;
+		color: DodgerBlue;
+		font-size: 30px;
+	}
+	
+	.label
+	{
+		width: initial;
+		color: DodgerBlue;
+		font-size: 18px;
+		margin-right: 15px;
+	}
+	
+	.input
+	{
+		width: 90%;
+		height: 25px;
+		font-family: Roboto, sans-serif;
+		font-size: 14px;
+		border: 2px solid DodgerBlue;
+		border-radius: 15px;
+		margin: 30px 20px;
+	}
+	
+	#button
+	{
+		font-family: Roboto, sans-serif;
+		font-size: 20px;
+		height: 43px;
+		width: 50%;
+		text-align: center;
+		display: block;
+		margin: auto;
+		border-radius: 25px;
+		background-color: white;
+		color: DodgerBlue;
+		border: 3px solid DodgerBlue;
+	}
+
+  #button:hover
+{
+	background-color: DodgerBlue;
+	color: white;
+	
+}
+
+	form
+	{
+		width: 50%;
+		margin: auto;
+	}
+
+table
+{
+	width: inherit;
+	margin: auto;
+}

@@ -1,6 +1,6 @@
 package com.restapi.dao;
 
-import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -39,6 +39,16 @@ public class MovieDAO extends JdbcDaoSupport
 		try
 		{
 			List<Movie> movies = this.getJdbcTemplate().query(query, mapper);
+			
+			Iterator<Movie> iterator = movies.iterator();
+			
+			while(iterator.hasNext())
+			{
+				if(!iterator.next().isValid())
+				{
+					iterator.remove();
+				}
+			}
 			return movies;
 		}catch(EmptyResultDataAccessException e)
 		{
@@ -48,17 +58,6 @@ public class MovieDAO extends JdbcDaoSupport
 	
 	public synchronized boolean addMovie(Movie movie)
 	{
-		if((movie == null) || (movie.getTitle() == null) || (movie.getTitle().isBlank()) || (movie.getRunTime() <= 0))
-		{
-			return false;
-		}
-		
-		LocalDate today = LocalDate.now();
-		if(movie.getLocalReleaseDt().isBefore(today))
-		{
-			return false;
-		}
-		
 		String query = "INSERT INTO " + TABLE_MOVIES + "(" + COLUMN_MOVIES_ID + ", " + COLUMN_MOVIES_TITLE + ", " + COLUMN_MOVIES_RUNTIME + ", " + COLUMN_MOVIES_RELEASEDT
 						+ ") VALUES(?, ?, ?, ?)";
 		
@@ -74,11 +73,29 @@ public class MovieDAO extends JdbcDaoSupport
 		}
 	}
 	
-	private int nextMovieId() throws EmptyResultDataAccessException
+	public int nextMovieId() throws EmptyResultDataAccessException
 	{
 		String query = "SELECT IFNULL(MAX(" + COLUMN_MOVIES_ID + "), 0) FROM " + TABLE_MOVIES;
 		
 			int Id = this.getJdbcTemplate().queryForObject(query, Integer.class);
 			return Id + 1;
+	}
+	
+	public Movie getMovie(String title, int runtime, String releaseDt)
+	{
+		String query = "SELECT * FROM " + TABLE_MOVIES + " WHERE " + COLUMN_MOVIES_TITLE + " = ? AND " + COLUMN_MOVIES_RUNTIME + " = ? AND " + COLUMN_MOVIES_RELEASEDT + " = ?";
+		
+		Object[] params = new Object[] {title, runtime, releaseDt};
+		
+		MovieMapper mapper = new MovieMapper();
+		
+		try
+		{
+			return this.getJdbcTemplate().queryForObject(query,  params, mapper);
+		}
+		catch(EmptyResultDataAccessException e)
+		{
+			return null;
+		}
 	}
 }

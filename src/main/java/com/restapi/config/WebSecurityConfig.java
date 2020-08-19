@@ -34,17 +34,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	{
 		http.csrf().disable();
 				
-		http.authorizeRequests().antMatchers("/reserve", "/getSeats", "/getMovies").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/reserve", "/getSeats", "/getMovies", "/getShows", "/getStatus").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 		
-		http.authorizeRequests().antMatchers("/addSeat", "/addShow", "/changePrice", "/addMovie", "addUser").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/addSeat", "/addShow", "/changePrice", "/addMovie", "addUser", "/AddMovie", "/AddShow", "/AddUser", "/SeatsViewChange", "/SeatsView", "/DisableSeat", "/DisableSeatChange", "/reserveSeats", "/ShowSelect", "/book", "/SeatSelect").access("hasRole('ROLE_ADMIN')");
 		
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/accessDenied");
 		
 		http.authorizeRequests().and().formLogin()
 		
 		.loginProcessingUrl("/login")
+		.loginPage("/AdminLogin")
 		.defaultSuccessUrl("/loginSuccess")
-		.failureUrl("/loginFailure")
+		.failureUrl("/loginFailure?error=true")
 		.usernameParameter("Username")
 		.passwordParameter("Password")
 		.and().logout()

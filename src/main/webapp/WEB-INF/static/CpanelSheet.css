@@ -1,0 +1,99 @@
+
+	
+	
+	@charset "ISO-8859-1";
+
+#logo
+	{
+		font-size: 90px;
+		font-family: "Times New Roman", Times, Serif;
+		color: white; 
+		margin: auto;
+		display: inline;
+	}
+	
+.button, form.logoutform
+	{
+		border: 3px solid DodgerBlue;
+		border-radius: 10px;
+		text-align: center;
+		font-family: Roboto, sans-serif;
+		font-size: 14px;
+		color: DodgerBlue;
+		width: 30%;
+		height: 40px;
+		display: inline;
+	}
+	
+#logoutbutton
+	{
+		position: absolute;
+		right: 0px;
+		width: 10%;
+		margin-right: 10px;
+		margin-top: 30px;
+		background-color: DodgerBlue;
+		color: white;
+		border-color: white;
+	}
+	
+#logoutbutton:hover
+	{
+		background-color: white;
+		color: DodgerBlue;
+	}
+	
+#header
+	{
+		background-color: DodgerBlue;
+		height: 100px;
+	}
+	
+#selector
+	{
+		width : 25%;
+		height: auto;
+		float: left;
+	}
+	
+.sidebutton
+	{
+		border: 3px solid DodgerBlue;
+		border-radius: 120px;
+		text-align: center;
+		font-family: Roboto, sans-serif;
+		font-size: 14px;
+		color: DodgerBlue;
+		width: 70%;
+		height: 40px;
+		margin: 17.5%;
+		margin-left: 5px;
+		margin-right: 0px;
+		margin-collapse: collapse;
+		display: block;
+		background-color: white;
+	}
+
+.sidebutton:hover
+	{
+		background-color: DodgerBlue;
+		color: white;
+	}
+
+#panelbody
+	{
+		display: inline;
+	}
+
+#selectedform
+  	{
+		float: left;
+		width: 75%;
+		height: auto;
+  	}
+
+.active
+	{
+		color: white;
+		background-color: DodgerBlue;
+	}

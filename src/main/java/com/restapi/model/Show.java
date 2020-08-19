@@ -2,7 +2,11 @@ package com.restapi.model;
 
 import java.time.LocalDateTime;
 
-public class Show {
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
+public class Show implements QueryResult
+{
 	private int id;
 	private int screenNo;
 	private ShowTime showTime;
@@ -42,25 +46,42 @@ public class Show {
 	
 	public void setShowTime(String showTime)
 	{
-		String[] time = showTime.split(":", 2);
 		if(this.showTime == null)
 		{
 			this.showTime = new ShowTime();
 		}
-		this.showTime.setHours(Integer.parseInt(time[0]));
-		this.showTime.setMinutes(Integer.parseInt(time[1]));
+		try
+		{
+			String[] time = showTime.split(":", 2);
+			this.showTime.setHours(Integer.parseInt(time[0]));
+			this.showTime.setMinutes(Integer.parseInt(time[1]));
+		}catch(NumberFormatException e1)
+		{
+			this.showTime.setHours(-1);
+			this.showTime.setMinutes(-1);
+		}
+		
 	}
 	
 	public void setShowDate(String showDate)
 	{
-		String[] date = showDate.split("/", 3);
 		if(this.showTime == null)
 		{
 			this.showTime = new ShowTime();
 		}
-		this.showTime.setDay(Integer.parseInt(date[0]));
-		this.showTime.setMonth(Integer.parseInt(date[1]));
-		this.showTime.setYear(Integer.parseInt(date[2]));
+		try
+		{
+			String[] date = showDate.split("/", 3);
+			this.showTime.setDay(Integer.parseInt(date[0]));
+			this.showTime.setMonth(Integer.parseInt(date[1]));
+			this.showTime.setYear(Integer.parseInt(date[2]));
+		}catch(NumberFormatException e)
+		{
+			this.showTime.setDay(0);
+			this.showTime.setMonth(0);
+			this.showTime.setYear(0);
+		}
+		
 	}
 	
 	public String getShowDate()
@@ -90,6 +111,31 @@ public class Show {
 		}else
 		{
 			//System.out.println("[DEBUG] : Variables not initialised!");
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean equals(Object show)
+	{
+		if(this == show)
+		{
+			return true;
+		}
+		
+		if(show instanceof Show)
+		{
+			if((this.screenNo == ((Show) show).screenNo) && (this.getShowDate() == ((Show) show).getShowDate()) && (this.getShowTime() == ((Show) show).getShowTime()) && (this.getMovieID() == ((Show) show).getMovieID()))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -125,7 +171,7 @@ public class Show {
 		public boolean isValid()
 		{
 			 LocalDateTime now = LocalDateTime.now();
-			 if((day > 0) && (month > 0) && (year > 0))
+			 if((day > 0) && (month > 0) && (year > 0) && (hours >= 0) && (minutes >= 0))
 			 {
 				 //System.out.println("[DEBUG] : Comparing...");
 				 return now.isBefore(LocalDateTime.of(year, month, day, hours, minutes));
@@ -178,5 +224,4 @@ public class Show {
 		
 		
 	}
-	
 }

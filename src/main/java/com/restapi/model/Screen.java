@@ -2,7 +2,7 @@ package com.restapi.model;
 
 import java.util.List;
 
-public class Screen implements Comparable{
+public class Screen implements Comparable<Screen>{
 	private int ID;
 	private int screenNo;
 	private Show show;
@@ -43,12 +43,12 @@ public class Screen implements Comparable{
 	}
 	
 	@Override
-	public int compareTo(Object screen) {
-		if((screen != null) && screen instanceof Screen)
+	public int compareTo(Screen screen) {
+		if((screen != null))
 		{
-			if(((Screen) screen).ID > 0)
+			if(screen.ID > 0)
 			{
-				return this.ID - ((Screen) screen).ID;
+				return this.ID - screen.ID;
 			}else
 			{
 				return -1;

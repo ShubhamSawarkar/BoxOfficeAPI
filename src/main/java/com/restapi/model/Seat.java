@@ -1,6 +1,9 @@
 package com.restapi.model;
 
-public class Seat {
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
+public class Seat implements QueryResult, Comparable<Seat> {
 	private int seatID;
 	private int screenNo;
 	private int rowNo;
@@ -84,6 +87,58 @@ public class Seat {
 		else
 		{
 			this.rowNo = 0;
+		}
+	}
+
+	@Override
+	public int compareTo(Seat seat) 
+	{
+		if(this.equals(seat))
+		{
+			return 0;
+		}
+		else
+		{
+			if(this.getScreenNo() == seat.getScreenNo())
+			{
+				if(this.getRowNo() == seat.getRowNo())
+				{
+					return this.getSeatNo() - seat.getSeatNo();
+				}
+				else
+				{
+					return this.getRowNo() - seat.getRowNo();
+				}
+			}
+			else
+			{
+				return this.getScreenNo() - seat.getScreenNo();
+			}
+		}
+		
+	}
+	
+	@Override
+	public boolean equals(Object seat)
+	{
+		if(this == seat)
+		{
+			return true;
+		}
+		else if((seat instanceof Seat))
+		{
+			if(this.getSeatID() == ((Seat) seat).getSeatID())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
 		}
 	}
 }

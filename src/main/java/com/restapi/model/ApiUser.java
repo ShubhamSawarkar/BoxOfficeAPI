@@ -1,6 +1,7 @@
 package com.restapi.model;
 
-public class ApiUser {
+public class ApiUser implements QueryResult
+{
 
 	private long userId;
 	private String userName;
@@ -46,5 +47,4 @@ public class ApiUser {
 	{
 		return "{User} \n" + " User Name : " + this.userName + "\n User ID : " + this.userId + "\n Encypted Password : " + this.encryptedPasword;
 	}
-	
 }

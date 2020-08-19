@@ -1,0 +1,78 @@
+
+	
+	@charset "ISO-8859-1";
+
+.input
+{
+	display: inline;
+	color: grey;
+	text-align: center;
+	border: 3px solid DodgerBlue;
+	height: 20px;
+	font-family: Roboto sans-serif;
+	font-size: 14px;
+	width: 30%;
+	margin-left: 20%;
+	margin-top: 50px;
+	margin-right: 20px;
+	border-radius: 20px;
+	height: 25px;
+}
+
+.showselectorbtn
+{
+	border: 3px solid DodgerBlue;
+	border-radius: 20px;
+	text-align: center;
+	font-family: Roboto, sans-serif;
+	font-size: 14px;
+	color: DodgerBlue;
+	width: 15%;
+	height: 25px;
+	display: inline;
+}
+
+.reserved
+{
+	background-color: grey;
+	margin: 15px;
+	filter: grayscale(100%) invert(40%);
+}
+
+.available
+{
+	background-color: white;
+	margin: 15px;
+}
+
+.showselectorbtn:hover
+{
+	color: white;
+	background-color: DodgerBlue;
+}
+
+#hall
+{
+	width: 60%;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.rowlabel
+{
+	text-align: left;
+	font-size: 14px;
+	margin-right: 30px;
+	color: DodgerBlue;
+}
+
+#directionlabel
+{
+	text-align: center;
+	font-weight: bold;
+	font-family: Roboto sans-serif;
+	display: block;
+	color: DodgerBlue;
+	margin-top: 15px;
+}
+
