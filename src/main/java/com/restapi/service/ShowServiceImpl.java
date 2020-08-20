@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.restapi.dao.ShowDAO;
 import com.restapi.model.QueryResult;
 import com.restapi.model.Show;
+import com.restapi.utils.DateUtils;
 import com.restapi.model.Seat;
 import com.restapi.dao.SeatDAO;
 
@@ -24,6 +25,11 @@ public class ShowServiceImpl implements ShowService {
 	@Override
 	public Show addShow(int screenNo, String date, String time, int movieId) 
 	{
+		date = DateUtils.format(date);
+		if(date == null)
+		{
+			return null;
+		}
 		Show show = new Show();
 		show.setScreenNo(screenNo);
 		show.setShowDate(date);

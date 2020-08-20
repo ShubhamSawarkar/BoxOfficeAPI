@@ -1,6 +1,7 @@
 package com.restapi.service;
 
 import com.restapi.model.QueryResult;
+import com.restapi.utils.DateUtils;
 import com.restapi.model.Movie;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,11 @@ public class MovieServiceImpl implements MovieService
 	@Override
 	public Movie addMovie(String title, int runtime, String releaseDt) 
 	{
+		releaseDt = DateUtils.format(releaseDt);
+		if(releaseDt == null)
+		{
+			return null;
+		}
 		Movie movie = new Movie(movieDao.nextMovieId(), title, runtime, releaseDt);
 		
 		if((movie == null) || (movie.getTitle() == null) || (movie.getTitle().isBlank()) || (movie.getRunTime() <= 0))

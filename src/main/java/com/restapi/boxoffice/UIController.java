@@ -15,7 +15,6 @@ import com.restapi.model.QueryResult;
 import com.restapi.model.Seat;
 import com.restapi.model.Show;
 import com.restapi.service.*;
-import com.restapi.utils.DateUtils;
 
 @Controller
 public class UIController 
@@ -47,7 +46,7 @@ public class UIController
 		}
 		else
 		{
-			return "jsp/userLogin";
+			return "jsp/UserLogin";
 		}
 	}
 	
@@ -90,13 +89,7 @@ public class UIController
 	public ModelAndView addShow(@RequestParam(name = "screen") int screenNo, @RequestParam(name = "show-date") String date, @RequestParam(name = "show-time") String time, @RequestParam(name = "movie") int movieId)
 	{
 		ModelAndView model = new ModelAndView("jsp/Confirmation");
-		date = DateUtils.format(date);
 		model.addObject("embed", "/AddShow.jsp");
-		if(date == null)
-		{
-			model.addObject("status", "failure");
-			return model;
-		}
 		if(showService.addShow(screenNo, date, time, movieId) != null)
 		{
 			model.addObject("status", "success");
@@ -114,7 +107,7 @@ public class UIController
 	public ModelAndView addMovie(@RequestParam(name = "title") String title, @RequestParam(name = "runtime") int runtime, @RequestParam(name = "release-date") String releaseDt)
 	{
 		ModelAndView model = new ModelAndView("jsp/Confirmation");
-		releaseDt = DateUtils.format(releaseDt);
+		
 		if(movieService.addMovie(title, runtime, releaseDt) != null)
 		{
 			model.addObject("status", "success");
