@@ -24,12 +24,16 @@ Normal API consumer users can use following mappings for performing specific tas
 2. /reserve: Returns the JSON object for the seat if the specified seat reserved successfully or an JSON object specifying reason for which the seat could not be reserved.
              Takes four integer arguments: screen (screen number), row (row number within that screen hall), seat (seat number within that row) and show (the show ID of the show for which the seat is to be reserved).
              
-3. /getShows: Return a list of JSON objects specifiying for each show its show ID, movie ID, show time, show date and screen on which show is to be held.
+3. /getShows: Returns a list of JSON objects specifiying for each show its show ID, movie ID, show time, show date and screen on which show is to be held.
 
 4. /getMovies: Returns a list of JSON objects specifying for each movie its movie ID, title, runtime, etc.
 
 5. /getStatus: Takes an integer as argument naming "show-id" specifying the show ID of which status is to be obtained. Returns a list of JSON objects specifying for each seat in the 
                corresponding screen hall whether it is reserved for the given show or not.
+
+6. /login: Takes two string arguments "Username" and "Password" to log user in.
+
+7. /logout: Logs out user.
                
 Technologies Used:
 
